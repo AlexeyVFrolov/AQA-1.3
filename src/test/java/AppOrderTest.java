@@ -17,7 +17,8 @@ public class AppOrderTest {
 
     @BeforeAll
     static void setUpAll() {
-        System.setProperty("webdriver.chrome.driver", "D:\\_DATA\\Desktop\\ATestProjects\\1.3\\chromedriver\\linux\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/chromedriver/linux/chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "D:\\_DATA\\Desktop\\ATestProjects\\1.3\\chromedriver\\linux\\chromedriver.exe");
         //System.setProperty("webdriver.chrome.driver", "D:\\_DATA\\Desktop\\ATestProjects\\1.3\\chromedriver\\win\\chromedriver.exe");
     }
 
