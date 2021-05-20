@@ -45,7 +45,17 @@ public class AppOrderTest {
     }
 
     @Test
-    void shouldAlertIfNotFilledFields() {
+    void shouldAlertIfNameFieldNotFilled() {
+        driver.get("http://localhost:9999");
+        driver.findElement(By.cssSelector("[type='tel']")).sendKeys("+79270000000");
+        driver.findElement(By.className("checkbox__box")).click();
+        driver.findElement(By.className("button")).click();
+        String text = driver.findElement(By.cssSelector(".input_invalid span.input__inner span.input__sub")).getText();
+        assertEquals("Поле обязательно для заполнения", text.trim());
+    }
+
+    @Test
+    void shouldAlertIfNameFieldWrong() {
         driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[type='text']")).sendKeys("Ivan Petrov");
         driver.findElement(By.cssSelector("[type='tel']")).sendKeys("+79270000000");
@@ -53,5 +63,36 @@ public class AppOrderTest {
         driver.findElement(By.className("button")).click();
         String text = driver.findElement(By.cssSelector(".input_invalid span.input__inner span.input__sub")).getText();
         assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.", text.trim());
+    }
+
+    @Test
+    void shouldAlertIfPhoneFieldNotFilled() {
+        driver.get("http://localhost:9999");
+        driver.findElement(By.cssSelector("[type='text']")).sendKeys("Василиса");
+        driver.findElement(By.className("checkbox__box")).click();
+        driver.findElement(By.className("button")).click();
+        String text = driver.findElement(By.cssSelector(".input_invalid span.input__inner span.input__sub")).getText();
+        assertEquals("Поле обязательно для заполнения", text.trim());
+    }
+
+    @Test
+    void shouldAlertIfPhoneFieldWrong() {
+        driver.get("http://localhost:9999");
+        driver.findElement(By.cssSelector("[type='text']")).sendKeys("Василиса");
+        driver.findElement(By.cssSelector("[type='tel']")).sendKeys("79270000000");
+        driver.findElement(By.className("checkbox__box")).click();
+        driver.findElement(By.className("button")).click();
+        String text = driver.findElement(By.cssSelector(".input_invalid span.input__inner span.input__sub")).getText();
+        assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.", text.trim());
+    }
+
+    @Test
+    void shouldAlertIfNoAgreement() {
+        driver.get("http://localhost:9999");
+        driver.findElement(By.cssSelector("[type='text']")).sendKeys("Василиса");
+        driver.findElement(By.cssSelector("[type='tel']")).sendKeys("+79270000000");
+        driver.findElement(By.className("button")).click();
+        String text = driver.findElement(By.cssSelector(".input_invalid span.checkbox__text")).getText();
+        assertEquals("Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй", text.trim());
     }
 }
