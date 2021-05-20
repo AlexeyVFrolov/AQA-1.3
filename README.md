@@ -1,0 +1,1 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/0ogl9f4dqap0scai?svg=true)](https://ci.appveyor.com/project/AlexeyVFrolov/aqa-1-3)
